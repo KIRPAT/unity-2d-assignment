@@ -53,12 +53,10 @@ public abstract class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D)){
             playerRigidBody.velocity = new Vector2(horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = true;
-        }
-        else if (Input.GetKey(KeyCode.A)){
+        } else if (Input.GetKey(KeyCode.A)){
             playerRigidBody.velocity = new Vector2(-horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = false;
-        }
-        else {
+        } else {
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
         }  
         characterSpriteRenderer.flipX = !currentCharacterDirection;

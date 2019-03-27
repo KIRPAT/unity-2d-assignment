@@ -30,7 +30,7 @@ public class Player_Alice : PlayerController{
         }
     }
     private void Dash(){
-        if (isDashActive == false){ //Activates isDashActive, since it is active now, we can check if we need to deactiate it before even dashing. 
+        if (!isDashActive){ //Activates isDashActive, since it is active now, we can check if we need to deactiate it before even dashing. 
             isDashActive = true; //Keeps the dash active as long as it is true.
         } else {
             if (dashTimeTemp <= 0){ //Checks if the dashTimeTemp has ended. If it did, we need to deactivate dash time, set the the specialMoveTrigger status flase and reset the dashTimeTemp. 
@@ -38,8 +38,7 @@ public class Player_Alice : PlayerController{
                 isSpecialMoveTriggered = false; //Prevents Dash() from getting executed all over again when the Dash() lifecycle ends. This also gives the character controlls back to us.
                 dashTimeTemp = dashTime; //Resets the dash timer.
                 //I would normally add a line here to stop dash movement, but as soon as I give back character controls to KeyboardController() from the base class, it already does the job for me. 
-            }
-            else {
+            } else {
                 dashTimeTemp -= Time.deltaTime;
                 playerRigidBody.velocity = (currentCharacterDirection ? Vector2.right : Vector2.left) * dashSpeed;
             }

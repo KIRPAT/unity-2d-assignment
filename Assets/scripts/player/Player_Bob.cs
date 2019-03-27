@@ -9,10 +9,12 @@ public class Player_Bob : PlayerController
     private bool isSmashActive;
 
     override public void SpecialMovePropertyInitializer(){ // -> void Start()
+        isSmashActive = false;
+        isSmashAllowed = true;
     }
 
     override public void SpecialMoveTrigger(){ // -> void Update()
-        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded) {
+        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && isSmashAllowed) {
             isSpecialMoveTriggered = true;       
         }
     }
@@ -22,8 +24,17 @@ public class Player_Bob : PlayerController
         }
     }
     private void Smash(){
-        isSpecialMoveTriggered = false;
-        playerRigidBody.velocity = Vector2.down * smashSpeed;
+        if (!isSmashActive){
+            isSmashActive = true;
+            isSmashAllowed = false; //Prevents multiple smashing in the air.
+        } else {
+            if(isGrounded){
+                isSmashActive = false;
+                isSpecialMoveTriggered = false;
+                isSmashAllowed = true;
+            } else {
+                playerRigidBody.velocity = Vector2.down * smashSpeed;
+            }
+        }
     }
-    
 }
