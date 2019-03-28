@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerController : MonoBehaviour {
-
     protected inputManager inputManager; 
-    private bool left, right, jump, switchCharacter;
     //HorizontalCharacterMovement
     public float horizontalSpeed;
     public Rigidbody2D playerRigidBody;
-    
     //Jump 
     public float jumpForce;
     protected bool jumpActionBlocker;
-
     //CharacterGroundHitboxCheckers
     public bool isGrounded;
     public Transform groundCheck;
@@ -21,7 +17,6 @@ public abstract class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
     //SpecialMove
     protected bool isSpecialMoveTriggered; 
-
     //Sprite
     public SpriteRenderer characterSpriteRenderer;
     public bool isCharacterLookingLeft = false;
@@ -47,14 +42,11 @@ public abstract class PlayerController : MonoBehaviour {
         HorizontalMovementHandler();
         JumpHandler();
     }
-
+    
     //SHARED METHODS
     private void HorizontalMovementHandler(){ 
        if (!isSpecialMoveTriggered) HorizontalMovement();
     }
-    
-   
-
     private void HorizontalMovement(){ 
         if (inputManager.IsRight()){
             playerRigidBody.velocity = new Vector2(horizontalSpeed * 1, playerRigidBody.velocity.y);

@@ -13,11 +13,11 @@ public class PlayerSpawnController : MonoBehaviour {
     public GameObject alicePrefab, bobPrefab;
     private GameObject activePlayer;
     public bool currentlyActivePlayer = true; // t: Alice, f: Bob
-    private bool actionBlocker, coolDownBlocker, isSwitchKeyReleased;
-
+    private bool actionBlocker, coolDownBlocker;
+    //Cooldown
     public float coolDownTime;
     private float coolDownTimeTemp;
-
+    
     void Start(){
         coolDownBlocker = true;
         actionBlocker= true;
