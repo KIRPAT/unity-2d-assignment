@@ -50,10 +50,10 @@ public abstract class PlayerController : MonoBehaviour {
     }
 
     private void KeyboardControls(){ 
-        if (Input.GetKey(KeyCode.D)){
+        if (Input.GetAxis("Horizontal") > 0){
             playerRigidBody.velocity = new Vector2(horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = true;
-        } else if (Input.GetKey(KeyCode.A)){
+        } else if (Input.GetAxis("Horizontal") < 0){
             playerRigidBody.velocity = new Vector2(-horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = false;
         } else {
