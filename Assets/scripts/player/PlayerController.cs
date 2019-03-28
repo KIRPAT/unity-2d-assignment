@@ -9,6 +9,7 @@ public abstract class PlayerController : MonoBehaviour {
     
     //Jump 
     public float jumpForce;
+    protected bool jumpActionBlocker;
 
     //CharacterGroundHitboxCheckers
     public bool isGrounded;
@@ -16,7 +17,7 @@ public abstract class PlayerController : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask whatIsGround;
     //SpecialMove
-    protected bool isSpecialMoveTriggered;
+    protected bool isSpecialMoveTriggered; 
 
     //Sprite
     public SpriteRenderer characterSpriteRenderer;
@@ -26,6 +27,7 @@ public abstract class PlayerController : MonoBehaviour {
     //MONO-BEHAVIOUR METHODS
     void Start(){
         //Local Properties
+        jumpActionBlocker = false;
         isSpecialMoveTriggered = false;
         currentCharacterDirection = isCharacterLookingLeft ? false : true; //Determines starting direction for the character 
         //Abstract Properties
@@ -62,14 +64,17 @@ public abstract class PlayerController : MonoBehaviour {
         characterSpriteRenderer.flipX = !currentCharacterDirection;
     }
     private void JumpHandler(){ 
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded){
+        if(Input.GetAxis("Jump") > 0 && isGrounded && !jumpActionBlocker){
             Debug.Log("Jump Press");
             playerRigidBody.velocity = Vector2.up * jumpForce;
         }
+        jumpActionBlocker = IsButtonOnRelease("Jump") ? false : true; //Prevents unintentional multiple jumps from Collision Detection latency. 
     }
     private void IsGroundedSetter(){ // Collision Detector
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
+
+    protected bool IsButtonOnRelease(string buttonName) => Input.GetAxis(buttonName) == 0 ? true : false;
     
     //ABSTRACT METHODS
     abstract public void SpecialMovePropertyInitializer();

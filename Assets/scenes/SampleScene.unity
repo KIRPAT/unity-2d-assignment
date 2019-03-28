@@ -1272,7 +1272,7 @@ MonoBehaviour:
   bobPrefab: {fileID: 4903709290078972616, guid: 890f0f7e5a1d36388a8a3630089d209b,
     type: 3}
   currentlyActivePlayer: 1
-  coolDownTime: 1
+  coolDownTime: 0.1
 --- !u!1 &2071061940
 GameObject:
   m_ObjectHideFlags: 0

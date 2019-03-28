@@ -11,9 +11,9 @@ I have also found a Brackeys
 
 public class PlayerSpawnController : MonoBehaviour {
     public GameObject alicePrefab, bobPrefab;
-    private GameObject ActivePlayer;
+    private GameObject activePlayer;
     public bool currentlyActivePlayer = true; // t: Alice, f: Bob
-    private bool actionBlocker, coolDownBlocker;
+    private bool actionBlocker, coolDownBlocker, isSwitchKeyReleased;
 
     public float coolDownTime;
     private float coolDownTimeTemp;
@@ -23,17 +23,26 @@ public class PlayerSpawnController : MonoBehaviour {
         actionBlocker= true;
         coolDownTimeTemp = coolDownTime;
         PlayerSpawner();
+        
     }
     void Update(){
         PlayerSwitchHandler();
     }
     private void PlayerSpawner(){
-        ActivePlayer = PlayerInstantiator(currentlyActivePlayer ? "Alice":"Bob");
+        activePlayer = PlayerInstantiator(currentlyActivePlayer ? "Alice":"Bob");
+    }
+    
+    private GameObject PlayerInstantiator(string playerName){
+        switch (playerName){
+            case "Alice": return Instantiate(alicePrefab) as GameObject; 
+            case "Bob": return Instantiate(bobPrefab) as GameObject;
+            default: return null; 
+        }
     }
     public void PlayerSwitchHandler() {
         // This method is similar to Dash(), Alice's Ability 
         // But this time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
-        // We do not constantly switch again and again... while the cooldown is active.
+        // We do not want to constantly switch again, and again... while the cooldown is active.
         // Since I'm not using Input.GetKeyDown here, 
         // I had to block the skill activasion with Cooldowns. 
         if (Input.GetAxis("Fire1") > 0 && coolDownBlocker){
@@ -46,24 +55,21 @@ public class PlayerSpawnController : MonoBehaviour {
         }
         if (!coolDownBlocker){
             coolDownTimeTemp -= Time.deltaTime;
-            if (coolDownTimeTemp <= 0){ //iff cooldown is finished
-                coolDownBlocker = true; //cooldown is blocked, and no longer gets executed
+            if (coolDownTimeTemp <= 0){ //If the cooldown is finished... 
+                if (IsSwicthKeyReleased()){ // ...check if the button is still being pressed, (Without this check, as soon as the cooldown ends, and if you are still holding the Switch button, you will unintentionally execute SwitchPlayer() again.)  
+                    coolDownBlocker = true; // ...if not, cooldown is blocked.
+                }
                 coolDownTimeTemp = coolDownTime;
             }
         }
     }
     private void PlayerSwicth(){
-        Transform currentPlayerTransform = ActivePlayer.transform;
-        Destroy(ActivePlayer);
+        Transform currentPlayerTransform = activePlayer.transform;
+        Destroy(activePlayer);
         currentlyActivePlayer = !currentlyActivePlayer;
         PlayerSpawner();
-        ActivePlayer.transform.position = currentPlayerTransform.position;    
+        activePlayer.transform.position = currentPlayerTransform.position;
     }
-    private GameObject PlayerInstantiator(string PlayerName){
-        switch (PlayerName){
-            case "Alice": return Instantiate(alicePrefab) as GameObject; 
-            case "Bob": return Instantiate(bobPrefab) as GameObject;
-            default: return null; 
-        }
-    }
+    private bool IsSwicthKeyReleased() => Input.GetAxis("Fire1") == 0 ? true : false;  
+
 }

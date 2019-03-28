@@ -14,7 +14,7 @@ public class Player_Bob : PlayerController
     }
 
     override public void SpecialMoveTrigger(){ // -> void Update()
-        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && isSmashAllowed) {
+        if(Input.GetAxis("Jump") > 0 && !isGrounded && isSmashAllowed && !jumpActionBlocker) {
             isSpecialMoveTriggered = true;       
         }
     }
