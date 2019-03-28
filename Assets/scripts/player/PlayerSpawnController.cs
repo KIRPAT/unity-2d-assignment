@@ -42,8 +42,8 @@ public class PlayerSpawnController : MonoBehaviour {
     }
     public void PlayerSwitchHandler() {
         /*  
-          This method is similar to Dash(), Alice's Ability 
-          But this time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
+          This method is similar to Dash(), Alice's Ability. 
+          This time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
           We do not want to constantly switch again, and again... while the cooldown is active.
           Since I'm not using Input.GetKeyDown here, 
           I had to block the skill activasion with Cooldowns.
@@ -73,6 +73,6 @@ public class PlayerSpawnController : MonoBehaviour {
         PlayerSpawner();
         activePlayer.transform.position = currentPlayerTransform.position;
     }
-    private bool IsSwicthKeyReleased() => Input.GetAxis("Fire1") == 0 ? true : false;  
+    private bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;  
 
 }

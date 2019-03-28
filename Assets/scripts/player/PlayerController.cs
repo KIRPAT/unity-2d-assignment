@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PlayerController : MonoBehaviour {
 
     protected inputManager inputManager; 
-    [HideInInspector] private bool left, right, jump, switchCharacter;
+    private bool left, right, jump, switchCharacter;
     //HorizontalCharacterMovement
     public float horizontalSpeed;
     public Rigidbody2D playerRigidBody;

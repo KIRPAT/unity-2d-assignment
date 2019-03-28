@@ -7,17 +7,12 @@ public class inputManager : MonoBehaviour
     //Actions
     private bool left, right, jump, switchCharacter;
     //Device-Type
-    private bool isPc, inputCleanerBlock , icb2;
-    public bool yoloAllowed = true; 
-     
+    private bool isPc; 
+ 
     void Start(){
-        icb2 = false;
-        inputCleanerBlock = false;
-        isPc = false;
         SetAllInputs(false);
     }
 
-    // Update is called once per frame
     void Update(){
         IsPcChecker();
         KeyboardInputHandler();
@@ -28,17 +23,14 @@ public class inputManager : MonoBehaviour
         /* 
         Normally I would go with Input.anyKey to test for PC inputs, 
         but while testing the buttons on PC with mouse clicks,
-        we are setting this value true too. 
+        we are setting this value to true unintentionally. 
         */
-        
         if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Jump") !=0 || Input.GetAxis("Fire1") !=0){ 
             SetIsPc(true);             
         }
     }
 
-    public void MakeUIActive(){
-        SetIsPc(false);
-    }
+    public void MakeUIActive() => SetIsPc(false);
 
     // Getters
     public bool IsLeft() => left;
