@@ -14,7 +14,7 @@ public class Player_Bob : PlayerController
     }
 
     override public void SpecialMoveTrigger(){ // -> void Update()
-        if(Input.GetAxis("Jump") > 0 && !isGrounded && isSmashAllowed && !jumpActionBlocker) {
+        if(inputManager.IsJump() && !isGrounded && isSmashAllowed && !jumpActionBlocker) {
             isSpecialMoveTriggered = true;       
         }
     }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerController : MonoBehaviour {
+
+    protected inputManager inputManager; 
+    [HideInInspector] private bool left, right, jump, switchCharacter;
     //HorizontalCharacterMovement
     public float horizontalSpeed;
     public Rigidbody2D playerRigidBody;
@@ -26,6 +29,7 @@ public abstract class PlayerController : MonoBehaviour {
     
     //MONO-BEHAVIOUR METHODS
     void Start(){
+        inputManager = GetComponentInParent<inputManager>();
         //Local Properties
         jumpActionBlocker = false;
         isSpecialMoveTriggered = false;
@@ -46,35 +50,35 @@ public abstract class PlayerController : MonoBehaviour {
 
     //SHARED METHODS
     private void HorizontalMovementHandler(){ 
-        if (!isSpecialMoveTriggered){
-            KeyboardControls();
-        }
+       if (!isSpecialMoveTriggered) HorizontalMovement();
     }
+    
+   
 
-    private void KeyboardControls(){ 
-        if (Input.GetAxis("Horizontal") > 0){
+    private void HorizontalMovement(){ 
+        if (inputManager.IsRight()){
             playerRigidBody.velocity = new Vector2(horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = true;
-        } else if (Input.GetAxis("Horizontal") < 0){
+        } else if (inputManager.IsLeft()){
             playerRigidBody.velocity = new Vector2(-horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = false;
-        } else {
+        } else if (!inputManager.IsRight() && !inputManager.IsLeft()) {
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
         }  
         characterSpriteRenderer.flipX = !currentCharacterDirection;
     }
     private void JumpHandler(){ 
-        if(Input.GetAxis("Jump") > 0 && isGrounded && !jumpActionBlocker){
+        if(inputManager.IsJump() && isGrounded && !jumpActionBlocker){
             Debug.Log("Jump Press");
             playerRigidBody.velocity = Vector2.up * jumpForce;
         }
-        jumpActionBlocker = IsButtonOnRelease("Jump") ? false : true; //Prevents unintentional multiple jumps from Collision Detection latency. 
+        jumpActionBlocker = IsJumpButtonOnRelease() ? false : true; //Prevents unintentional multiple jumps from Collision Detection latency. 
     }
     private void IsGroundedSetter(){ // Collision Detector
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
-    protected bool IsButtonOnRelease(string buttonName) => Input.GetAxis(buttonName) == 0 ? true : false;
+    protected bool IsJumpButtonOnRelease() => !inputManager.IsJump() ? true : false;
     
     //ABSTRACT METHODS
     abstract public void SpecialMovePropertyInitializer();

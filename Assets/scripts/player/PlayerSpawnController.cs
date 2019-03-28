@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-I know that you explicitly wanted me to create two scenes for each ccharacter.
+I know that you explicitly wanted me to create two scenes for each character.
 Then I thouth of the game "Trine", where you can switch between characters theree on the fly. 
-So.. I have implemented that swicth mechanic instead. Having the same scene twice looked like redundant.
-I have also found a Brackeys 
+So.. I have implemented that swicth mechanic instead. Having the same scene twice looked like redundant. 
 */ 
 
 public class PlayerSpawnController : MonoBehaviour {
+    private inputManager inputManager;
     public GameObject alicePrefab, bobPrefab;
     private GameObject activePlayer;
     public bool currentlyActivePlayer = true; // t: Alice, f: Bob
@@ -23,13 +23,14 @@ public class PlayerSpawnController : MonoBehaviour {
         actionBlocker= true;
         coolDownTimeTemp = coolDownTime;
         PlayerSpawner();
-        
+        inputManager = GetComponent<inputManager>();
     }
     void Update(){
         PlayerSwitchHandler();
     }
     private void PlayerSpawner(){
         activePlayer = PlayerInstantiator(currentlyActivePlayer ? "Alice":"Bob");
+        activePlayer.transform.parent = gameObject.transform;
     }
     
     private GameObject PlayerInstantiator(string playerName){
@@ -40,12 +41,14 @@ public class PlayerSpawnController : MonoBehaviour {
         }
     }
     public void PlayerSwitchHandler() {
-        // This method is similar to Dash(), Alice's Ability 
-        // But this time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
-        // We do not want to constantly switch again, and again... while the cooldown is active.
-        // Since I'm not using Input.GetKeyDown here, 
-        // I had to block the skill activasion with Cooldowns. 
-        if (Input.GetAxis("Fire1") > 0 && coolDownBlocker){
+        /*  
+          This method is similar to Dash(), Alice's Ability 
+          But this time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
+          We do not want to constantly switch again, and again... while the cooldown is active.
+          Since I'm not using Input.GetKeyDown here, 
+          I had to block the skill activasion with Cooldowns.
+        */ 
+        if (inputManager.IsSwitchCharacter() && coolDownBlocker){
             coolDownBlocker = false; //cooldown activated 
             actionBlocker = false; //action activated
         }
