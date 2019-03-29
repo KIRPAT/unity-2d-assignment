@@ -5,10 +5,10 @@ using UnityEngine;
 public class Player_Alice : PlayerController{
     //DashProperties
     public float dashSpeed, dashTime;
-    private float dashTimeTemp;
+    float dashTimeTemp;
     public int allowedDashes;
-    private int allowedDashesTemp;
-    private bool isDashActive;
+    int allowedDashesTemp;
+    bool isDashActive;
     public override void SpecialMovePropertyInitializer(){ // -> void Start()
         isDashActive = false;
         dashTimeTemp = dashTime;

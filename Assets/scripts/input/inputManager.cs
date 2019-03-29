@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class inputManager : MonoBehaviour
-{
+public class inputManager : MonoBehaviour{
     //Actions
-    private bool left, right, jump, switchCharacter;
+    bool left, right, jump, switchCharacter;
     //Device-Type
-    private bool isPc; 
- 
-    void Start(){
-        SetAllInputs(false);
-    }
-
+    bool isPc; 
+    
+    void Start() => SetAllInputs(false);
     void Update(){
         IsPcChecker();
         KeyboardInputHandler();
     }
-    
-
     void IsPcChecker(){
         /* 
         Normally I would go with Input.anyKey to test for PC inputs, 
@@ -29,7 +23,6 @@ public class inputManager : MonoBehaviour
             SetIsPc(true);             
         }
     }
-
     public void MakeUIActive() => SetIsPc(false);
 
     // Getters
@@ -49,7 +42,6 @@ public class inputManager : MonoBehaviour
         jump = state;
         switchCharacter = state;
     }
-
     void KeyboardInputHandler(){
         if(isPc){  
             if (Input.GetAxis("Horizontal") > 0) SetRight(true);

@@ -72,7 +72,6 @@ public abstract class PlayerController : MonoBehaviour {
     void IsGroundedSetter(){ // Collision Detector
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
-
     protected bool IsJumpButtonOnRelease() => !inputManager.IsJump() ? true : false;
     
     //ABSTRACT METHODS
