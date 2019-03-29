@@ -9,7 +9,7 @@ public class Player_Alice : PlayerController{
     public int allowedDashes;
     int allowedDashesTemp;
     bool isDashActive;
-    
+    //METHODS
     public override void SpecialMovePropertyInitializer(){ // -> void Start()
         isDashActive = false;
         dashTimeTemp = dashTime;

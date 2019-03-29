@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerController : MonoBehaviour {
-    protected inputManager inputManager; 
+    //Components
+    protected inputManager inputManager;
+    protected Rigidbody2D playerRigidBody; 
     //HorizontalCharacterMovement
     public float horizontalSpeed;
-    protected Rigidbody2D playerRigidBody;
     //Jump 
     public float jumpForce;
     protected bool jumpActionBlocker;
@@ -45,8 +46,7 @@ public abstract class PlayerController : MonoBehaviour {
         HorizontalMovementHandler();
         JumpHandler();
     }
-    
-    //SHARED METHODS
+    //METHODS
     void HorizontalMovementHandler(){ 
        if (!isSpecialMoveTriggered) HorizontalMovement();
     }
@@ -73,7 +73,6 @@ public abstract class PlayerController : MonoBehaviour {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
     protected bool IsJumpButtonOnRelease() => !inputManager.IsJump() ? true : false;
-    
     //ABSTRACT METHODS
     abstract public void SpecialMovePropertyInitializer();
     abstract public void SpecialMoveTriggerListener();
