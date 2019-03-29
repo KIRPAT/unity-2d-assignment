@@ -9,12 +9,12 @@ public class Player_Alice : PlayerController{
     public int allowedDashes;
     int allowedDashesTemp;
     bool isDashActive;
+    
     public override void SpecialMovePropertyInitializer(){ // -> void Start()
         isDashActive = false;
         dashTimeTemp = dashTime;
         allowedDashesTemp = allowedDashes;
     }
-    
     public override void SpecialMoveTriggerListener(){   
         //Without jumpActionBlocker, the dash skill gets activated as soon as we are of the ground.
         if (inputManager.IsJump() && !isGrounded && allowedDashesTemp > 0 && !jumpActionBlocker){
@@ -23,12 +23,8 @@ public class Player_Alice : PlayerController{
         }
     }
     public override void SpecialMoveHandler(){
-        if (isSpecialMoveTriggered){
-            Dash();
-        }
-        if (isGrounded){
-            allowedDashesTemp = allowedDashes;
-        }
+        if (isSpecialMoveTriggered) Dash();
+        if (isGrounded) allowedDashesTemp = allowedDashes;
     }
     void Dash(){
         if (!isDashActive){ //Activates isDashActive, since it is active now, we can check if we need to deactiate it before even dashing. 
