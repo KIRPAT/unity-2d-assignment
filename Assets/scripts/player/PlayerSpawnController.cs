@@ -25,14 +25,11 @@ public class PlayerSpawnController : MonoBehaviour {
         PlayerSpawner();
         inputManager = GetComponent<inputManager>();
     }
-    void Update(){
-        PlayerSwitchHandler();
-    }
+    void Update() => PlayerSwitchHandler();
     void PlayerSpawner(){
         activePlayer = PlayerInstantiator(currentlyActivePlayer ? "Alice":"Bob");
         activePlayer.transform.parent = gameObject.transform;
-    }
-    
+    } 
     GameObject PlayerInstantiator(string playerName){
         switch (playerName){
             case "Alice": return Instantiate(alicePrefab) as GameObject; 
@@ -73,6 +70,5 @@ public class PlayerSpawnController : MonoBehaviour {
         PlayerSpawner();
         activePlayer.transform.position = currentPlayerTransform.position;
     }
-    bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;  
-
+    bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;
 }
