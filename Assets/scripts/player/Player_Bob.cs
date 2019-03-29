@@ -23,7 +23,7 @@ public class Player_Bob : PlayerController
             Smash();
         }
     }
-    private void Smash(){
+    void Smash(){
         if (!isSmashActive){
             isSmashActive = true;
             isSmashAllowed = false; //Prevents multiple smashing in the air.

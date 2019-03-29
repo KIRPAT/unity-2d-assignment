@@ -47,10 +47,10 @@ public abstract class PlayerController : MonoBehaviour {
     }
     
     //SHARED METHODS
-    private void HorizontalMovementHandler(){ 
+    void HorizontalMovementHandler(){ 
        if (!isSpecialMoveTriggered) HorizontalMovement();
     }
-    private void HorizontalMovement(){ 
+    void HorizontalMovement(){ 
         if (inputManager.IsRight()){
             playerRigidBody.velocity = new Vector2(horizontalSpeed * 1, playerRigidBody.velocity.y);
             currentCharacterDirection = true;
@@ -62,14 +62,14 @@ public abstract class PlayerController : MonoBehaviour {
         }  
         characterSpriteRenderer.flipX = !currentCharacterDirection;
     }
-    private void JumpHandler(){ 
+    void JumpHandler(){ 
         if(inputManager.IsJump() && isGrounded && !jumpActionBlocker){
             Debug.Log("Jump Press");
             playerRigidBody.velocity = Vector2.up * jumpForce;
         }
         jumpActionBlocker = IsJumpButtonOnRelease() ? false : true; //Prevents unintentional multiple jumps from Collision Detection latency. 
     }
-    private void IsGroundedSetter(){ // Collision Detector
+    void IsGroundedSetter(){ // Collision Detector
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 

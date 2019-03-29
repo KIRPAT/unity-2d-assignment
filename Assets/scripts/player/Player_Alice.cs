@@ -30,7 +30,7 @@ public class Player_Alice : PlayerController{
             allowedDashesTemp = allowedDashes;
         }
     }
-    private void Dash(){
+    void Dash(){
         if (!isDashActive){ //Activates isDashActive, since it is active now, we can check if we need to deactiate it before even dashing. 
             isDashActive = true; //Keeps the dash active as long as it is true.
         } else {

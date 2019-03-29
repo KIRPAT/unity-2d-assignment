@@ -28,19 +28,19 @@ public class PlayerSpawnController : MonoBehaviour {
     void Update(){
         PlayerSwitchHandler();
     }
-    private void PlayerSpawner(){
+    void PlayerSpawner(){
         activePlayer = PlayerInstantiator(currentlyActivePlayer ? "Alice":"Bob");
         activePlayer.transform.parent = gameObject.transform;
     }
     
-    private GameObject PlayerInstantiator(string playerName){
+    GameObject PlayerInstantiator(string playerName){
         switch (playerName){
             case "Alice": return Instantiate(alicePrefab) as GameObject; 
             case "Bob": return Instantiate(bobPrefab) as GameObject;
             default: return null; 
         }
     }
-    public void PlayerSwitchHandler() {
+    void PlayerSwitchHandler() {
         /*  
           This method is similar to Dash(), Alice's Ability. 
           This time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
@@ -66,13 +66,13 @@ public class PlayerSpawnController : MonoBehaviour {
             }
         }
     }
-    private void PlayerSwicth(){
+    void PlayerSwicth(){
         Transform currentPlayerTransform = activePlayer.transform;
         Destroy(activePlayer);
         currentlyActivePlayer = !currentlyActivePlayer;
         PlayerSpawner();
         activePlayer.transform.position = currentPlayerTransform.position;
     }
-    private bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;  
+    bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;  
 
 }

@@ -50,7 +50,7 @@ public class inputManager : MonoBehaviour
         switchCharacter = state;
     }
 
-    private void KeyboardInputHandler(){
+    void KeyboardInputHandler(){
         if(isPc){  
             if (Input.GetAxis("Horizontal") > 0) SetRight(true);
             if (Input.GetAxis("Horizontal") <= 0) SetRight(false);
