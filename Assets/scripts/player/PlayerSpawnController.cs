@@ -9,14 +9,14 @@ So.. I have implemented that switch mechanic instead.
 */ 
 
 public class PlayerSpawnController : MonoBehaviour {
-    private inputManager inputManager;
+    inputManager inputManager;
     public GameObject alicePrefab, bobPrefab;
-    private GameObject activePlayer;
+    GameObject activePlayer;
     public bool currentlyActivePlayer = true; // t: Alice, f: Bob
-    private bool actionBlocker, coolDownBlocker;
+    bool actionBlocker, coolDownBlocker;
     //Cooldown
     public float coolDownTime;
-    private float coolDownTimeTemp;
+    float coolDownTimeTemp;
     
     void Start(){
         coolDownBlocker = true;
@@ -48,7 +48,7 @@ public class PlayerSpawnController : MonoBehaviour {
             coolDownBlocker = false; //cooldown activated 
             actionBlocker = false; //action activated
         }
-        if (!actionBlocker){ //makes sure the action is played only when triggered
+        if (!actionBlocker){ //makes sure the action is executed only when triggered
             PlayerSwitch();    
             actionBlocker = true; // action is no longer allowed
         }
