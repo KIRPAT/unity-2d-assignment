@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class inputManager : MonoBehaviour{
-    //Actions
+    //Properties
     bool left, right, jump, switchCharacter;
-    //Device-Type
     bool isPc; 
-    
+    //Methods
     void Start() => SetAllInputs(false);
     void Update(){
         IsPcChecker();
@@ -24,7 +23,6 @@ public class inputManager : MonoBehaviour{
         }
     }
     public void MakeUIActive() => SetIsPc(false);
-
     // Getters
     public bool IsLeft() => left;
     public bool IsRight() => right;
