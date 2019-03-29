@@ -39,7 +39,7 @@ public abstract class PlayerController : MonoBehaviour {
         //Physics State Setters
         IsGroundedSetter();
         //Abstract Methods
-        SpecialMoveTrigger(); 
+        SpecialMoveTriggerListener(); 
         SpecialMoveHandler(); 
         //Local Handler Methods
         HorizontalMovementHandler();
@@ -77,6 +77,6 @@ public abstract class PlayerController : MonoBehaviour {
     
     //ABSTRACT METHODS
     abstract public void SpecialMovePropertyInitializer();
-    abstract public void SpecialMoveTrigger();
+    abstract public void SpecialMoveTriggerListener();
     abstract public void SpecialMoveHandler();   
 }

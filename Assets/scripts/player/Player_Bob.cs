@@ -13,7 +13,7 @@ public class Player_Bob : PlayerController
         isSmashAllowed = true;
     }
 
-    override public void SpecialMoveTrigger(){ // -> void Update()
+    override public void SpecialMoveTriggerListener(){ // -> void Update()
         if(inputManager.IsJump() && !isGrounded && isSmashAllowed && !jumpActionBlocker) {
             isSpecialMoveTriggered = true;       
         }
