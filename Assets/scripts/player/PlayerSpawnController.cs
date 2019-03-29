@@ -5,7 +5,7 @@ using UnityEngine;
 /*
 I know that you explicitly wanted me to create two scenes for each character.
 Then I thought of the game "Trine", where you can switch between theree characters on the fly. 
-So.. I have implemented that swicth mechanic instead. Having the same scene twice looked like redundant. 
+So.. I have implemented that switch mechanic instead.
 */ 
 
 public class PlayerSpawnController : MonoBehaviour {
@@ -42,33 +42,32 @@ public class PlayerSpawnController : MonoBehaviour {
           This method is similar to Dash(), Alice's Ability. 
           This time, the PlayerSwitch() needs to be executed once and waits for the cooldown. 
           We do not want to constantly switch again, and again... while the cooldown is active.
-          Since I'm not using Input.GetKeyDown here, 
-          I had to block the skill activasion with Cooldowns.
+          Since I'm not using Input.GetKeyDown here, I had to block the skill activasion with Cooldowns.
         */ 
         if (inputManager.IsSwitchCharacter() && coolDownBlocker){
             coolDownBlocker = false; //cooldown activated 
             actionBlocker = false; //action activated
         }
         if (!actionBlocker){ //makes sure the action is played only when triggered
-            PlayerSwicth();    
+            PlayerSwitch();    
             actionBlocker = true; // action is no longer allowed
         }
         if (!coolDownBlocker){
             coolDownTimeTemp -= Time.deltaTime;
             if (coolDownTimeTemp <= 0){ //If the cooldown is finished... 
-                if (IsSwicthKeyReleased()){ // ...check if the button is still being pressed, (Without this check, as soon as the cooldown ends, and if you are still holding the Switch button, you will unintentionally execute SwitchPlayer() again.)  
+                if (IsSwitchKeyReleased()){ // ...check if the button is still being pressed, (Without this check, as soon as the cooldown ends, if you are still holding the Switch button, you will unintentionally execute SwitchPlayer() again.)  
                     coolDownBlocker = true; // ...if not, cooldown is blocked.
                 }
                 coolDownTimeTemp = coolDownTime;
             }
         }
     }
-    void PlayerSwicth(){
+    void PlayerSwitch(){
         Transform currentPlayerTransform = activePlayer.transform;
         Destroy(activePlayer);
         currentlyActivePlayer = !currentlyActivePlayer;
         PlayerSpawner();
         activePlayer.transform.position = currentPlayerTransform.position;
     }
-    bool IsSwicthKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;
+    bool IsSwitchKeyReleased() => !inputManager.IsSwitchCharacter() ? true : false;
 }
