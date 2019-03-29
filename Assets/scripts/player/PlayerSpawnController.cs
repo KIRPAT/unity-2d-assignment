@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
 I know that you explicitly wanted me to create two scenes for each character.
-Then I thouth of the game "Trine", where you can switch between characters theree on the fly. 
+Then I thought of the game "Trine", where you can switch between theree characters on the fly. 
 So.. I have implemented that swicth mechanic instead. Having the same scene twice looked like redundant. 
 */ 
 

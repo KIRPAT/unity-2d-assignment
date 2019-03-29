@@ -6,7 +6,7 @@ public abstract class PlayerController : MonoBehaviour {
     protected inputManager inputManager; 
     //HorizontalCharacterMovement
     public float horizontalSpeed;
-    public Rigidbody2D playerRigidBody;
+    protected Rigidbody2D playerRigidBody;
     //Jump 
     public float jumpForce;
     protected bool jumpActionBlocker;
@@ -18,17 +18,20 @@ public abstract class PlayerController : MonoBehaviour {
     //SpecialMove
     protected bool isSpecialMoveTriggered; 
     //Sprite
-    public SpriteRenderer characterSpriteRenderer;
+    protected SpriteRenderer characterSpriteRenderer;
     public bool isCharacterLookingLeft = false;
     protected bool currentCharacterDirection;  //true: right, false: left
     
     //MONO-BEHAVIOUR METHODS
     void Start(){
+        //ParentComponentAccess
         inputManager = GetComponentInParent<inputManager>();
         //Local Properties
         jumpActionBlocker = false;
         isSpecialMoveTriggered = false;
         currentCharacterDirection = isCharacterLookingLeft ? false : true; //Determines starting direction for the character 
+        characterSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerRigidBody = GetComponent<Rigidbody2D>();
         //Abstract Properties
         SpecialMovePropertyInitializer();
     } 
