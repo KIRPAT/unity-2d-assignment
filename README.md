@@ -3,7 +3,7 @@ I was given an assignment to build a simple 2D Unity game scene with two charact
 ability for each one. Then I have implement GUI controls too.
 
 ![Character
-Scene][https://raw.githubusercontent.com/KIRPAT/unity-2d-assignment/master/ScreenShots/in-game.png]
+Scene](https://raw.githubusercontent.com/KIRPAT/unity-2d-assignment/master/ScreenShots/in-game.png)
 
 
 
