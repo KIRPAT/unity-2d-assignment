@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PlayerController : MonoBehaviour {
     //Components
-    protected inputManager inputManager;
+    protected InputManager inputManager;
     protected Rigidbody2D playerRigidBody; 
     //HorizontalCharacterMovement
     public float horizontalSpeed;
@@ -26,7 +26,7 @@ public abstract class PlayerController : MonoBehaviour {
     //MONO-BEHAVIOUR METHODS
     void Start(){
         //ParentComponentAccess
-        inputManager = GetComponentInParent<inputManager>();
+        inputManager = GetComponentInParent<InputManager>();
         //Local Properties
         jumpActionBlocker = false;
         isSpecialMoveTriggered = false;

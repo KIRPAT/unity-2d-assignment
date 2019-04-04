@@ -9,7 +9,7 @@ So.. I have implemented that switch mechanic instead.
 */ 
 
 public class PlayerSpawnController : MonoBehaviour {
-    inputManager inputManager;
+    InputManager inputManager;
     public GameObject alicePrefab, bobPrefab;
     GameObject activePlayer;
     public bool currentlyActivePlayer = true; // t: Alice, f: Bob
@@ -23,7 +23,7 @@ public class PlayerSpawnController : MonoBehaviour {
         actionBlocker= true;
         coolDownTimeTemp = coolDownTime;
         PlayerSpawner();
-        inputManager = GetComponent<inputManager>();
+        inputManager = GetComponent<InputManager>();
     }
     void Update() => PlayerSwitchHandler();
     void PlayerSpawner(){

@@ -16,7 +16,7 @@ public class Player_Alice : PlayerController{
         allowedDashesTemp = allowedDashes;
     }
     public override void SpecialMoveTriggerListener(){   
-        //Without jumpActionBlocker, the dash skill gets activated as soon as we are of the ground.
+        //Without jumpActionBlocker, the dash skill gets activated as soon as we are off the ground.
         if (inputManager.IsJump() && !isGrounded && allowedDashesTemp > 0 && !jumpActionBlocker){
             allowedDashesTemp -= 1;
             isSpecialMoveTriggered = true;

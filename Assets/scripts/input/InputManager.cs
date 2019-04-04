@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class inputManager : MonoBehaviour{
+public class InputManager : MonoBehaviour{
     //Properties
     bool left, right, jump, switchCharacter;
     bool isPc; 
